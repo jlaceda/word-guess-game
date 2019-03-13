@@ -314,7 +314,6 @@ var WordGuessGame = {
 
 	updateDisplay: function()
 	{
-		this.log();
 		winsEl.textContent = this.wins;
 		remainingGuessCountEl.textContent = this.remainingGuesses;
 		lettersGuessedEl.textContent = this.lettersGuessed;
@@ -344,23 +343,6 @@ var WordGuessGame = {
 			this.wordsNotGuessed.push(this.currentWord);
 			return;
 		}
-	},
-
-	// console.log the game state for debugging
-	log: function()
-	{
-		for (const k in this)
-		{
-			if (this.hasOwnProperty(k))
-			{
-				const element = this[k];
-				if (typeof(element) !== "function")
-				{
-					console.log(k + ": " + element);
-				}
-			}
-		}
-		console.log("========================================");
 	},
 }
 
