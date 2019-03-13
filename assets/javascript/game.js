@@ -328,7 +328,7 @@ var WordGuessGame = {
 		{
 			this.wins++;
 			this.isPlaying = false;
-			this.helpText = "Dang! You won the round, good job!&nbsp;Press ANY letter key to get a new word.";
+			this.helpText = "Dang! You won the round, good job! Press ANY letter key to get a new word.";
 			// put word into wordsNotGuessed
 			this.wordsGuessed.push(this.currentWord);
 			return;
@@ -338,7 +338,7 @@ var WordGuessGame = {
 		if (this.remainingGuesses === 0)
 		{
 			this.isPlaying = false;
-			this.helpText = "Out of guesses! The word was " + this.currentWord + ".&nbsp;Press ANY letter key to get a new word.";
+			this.helpText = "Out of guesses! The word was " + this.currentWord + ". Press ANY letter key to get a new word.";
 			// put word into wordsNotGuessed
 			this.wordsNotGuessed.push(this.currentWord);
 			return;
