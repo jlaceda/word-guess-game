@@ -1,3 +1,9 @@
-span#wordDisplay {
+span#wordDisplay
+{
     letter-spacing: 0.5rem;
+}
+
+#musicPlayer
+{
+    display: hidden;
 }
