@@ -219,7 +219,8 @@ var WordGuessGame = {
 	lettersGuessed: "",
 	wordDisplay: "",
 	isPlaying: false,
-	helpText: "Press ANY key to get started.",
+	helpText: "Press ANY letter key to get started.",
+	gameOver: false,
 
 	// METHODS:
 	// method that puts a new word into currentWord
@@ -227,9 +228,12 @@ var WordGuessGame = {
 	// also moves the chosen word into wordsUsed
 	newRandomWord: function() 
 	{
+		// clear word
+		this.currentWord = "";
+
+		// Game over check
 		if (this.availableWords.length === 0)
 		{
-			this.helpText = "Who wrote this code?! We ran out of words...";
 			return;
 		}
 		
@@ -250,6 +254,13 @@ var WordGuessGame = {
 		// initialize game
 		this.newRandomWord();
 
+		if (this.currentWord === "")
+		{
+			this.gameOver = true;
+			this.helpText = "Game Over! You got " + this.wins + " .";
+			return;
+		}
+
 		// create display of underscores for each letter in the word.
 		var blanks = ""
 		for (let i = 0; i < this.currentWord.length; i++)
@@ -257,8 +268,9 @@ var WordGuessGame = {
 			blanks = blanks + "_";
 		}
 
+		// init round game state
 		this.wordDisplay = blanks;
-		this.remainingGuesses = 10;
+		this.remainingGuesses = 15;
 		this.lettersGuessed = "";
 		this.helpText = "Press a letter key to guess."
 		this.isPlaying = true;
@@ -269,7 +281,7 @@ var WordGuessGame = {
 		// already guess this letter, skip.
 		if (this.lettersGuessed.indexOf(letter) !== -1)
 		{
-			this.helpText = "You already guessed " + letter + " before.";
+			this.helpText = "You have already guessed " + letter + " before.";
 			return;
 		}
 
@@ -323,9 +335,9 @@ var WordGuessGame = {
 			return;
 		}
 
+		// round loss
 		if (this.remainingGuesses === 0)
 		{
-			this.helpText = "Out of guesses! The word was " + this.currentWord + ". Press ANY key to get a new word.";
 			this.isPlaying = false;
 			this.helpText = "Out of guesses! The word was " + this.currentWord + ".&nbsp;Press ANY letter key to get a new word.";
 			// put word into wordsNotGuessed
@@ -357,6 +369,11 @@ var WordGuessGame = {
 // anytime a key is pressed then released, do stuff:
 document.onkeyup = function(event)
 {
+	if (WordGuessGame.gameOver === true)
+	{
+		return;
+	}
+
 	var keyPressed = event.key;
 	var isNotLetter = WordGuessGame.LEGALLETTERS.indexOf(keyPressed) === -1;
 
