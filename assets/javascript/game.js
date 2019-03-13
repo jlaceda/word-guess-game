@@ -211,7 +211,8 @@ var WordGuessGame = {
 	"wing",
 	"wire",
 	"worm"],
-	wordsUsed: [],
+	wordsGuessed: [],
+	wordsNotGuessed: [],
 	currentWord: "",
 	wins: 0,
 	remainingGuesses: 0,
@@ -238,9 +239,6 @@ var WordGuessGame = {
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice#Remove_1_element_from_index_3
 		// returns an array with a single item.
 		var word = this.availableWords.splice(randomIndex, 1)[0];
-
-		// put word into wordsUsed
-		this.wordsUsed.push(word);
 
 		// update current word
 		this.currentWord = word;
@@ -319,7 +317,9 @@ var WordGuessGame = {
 		{
 			this.wins++;
 			this.isPlaying = false;
-			this.helpText = "Dang! You won the round, good job! Press ANY key to get a new word.";
+			this.helpText = "Dang! You won the round, good job!&nbsp;Press ANY letter key to get a new word.";
+			// put word into wordsNotGuessed
+			this.wordsGuessed.push(this.currentWord);
 			return;
 		}
 
@@ -327,6 +327,9 @@ var WordGuessGame = {
 		{
 			this.helpText = "Out of guesses! The word was " + this.currentWord + ". Press ANY key to get a new word.";
 			this.isPlaying = false;
+			this.helpText = "Out of guesses! The word was " + this.currentWord + ".&nbsp;Press ANY letter key to get a new word.";
+			// put word into wordsNotGuessed
+			this.wordsNotGuessed.push(this.currentWord);
 			return;
 		}
 	},
