@@ -6,6 +6,12 @@ John Laceda - UW Coding Bootcamp Homework
 ## Hurdles
 My main hurdle was sticking/thinking of a theme. Because of this there is no styling. :(
 
+## Hopes and Dreams
+If I was more focused and/or had more time I would do more:
+- add animations
+- progress bar for song playback
+- test and add mobile responsives
+
 ## Game Object
 I wanted the game object to not interact with anything in the Browser. So I took out any outside references to elements and console.
 
