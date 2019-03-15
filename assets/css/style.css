@@ -1,3 +1,17 @@
+body
+{
+    color:#888;
+    background-color: #000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+hr
+{
+    border: none;
+    border-top: 0.3rem double #888;
+    color: #333;
+}
+
 span#wordDisplay
 {
     letter-spacing: 0.5rem;
