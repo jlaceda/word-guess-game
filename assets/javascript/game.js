@@ -51,10 +51,8 @@ var WordGuessGame =
 			return;
 		}
 		
-		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 		var randomIndex = Math.floor(Math.random() * Math.floor(this.availableWords.length));
 
-		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice#Remove_1_element_from_index_3
 		// returns an array with a single item.
 		var word = this.availableWords.splice(randomIndex, 1)[0];
 
@@ -122,13 +120,11 @@ var WordGuessGame =
 
 		this.helpText = "Noice!"
 
-		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
 		var startSearchFrom = 0;
 		while (word.indexOf(letter, startSearchFrom) !== -1) 
 		{
 			var index = word.indexOf(letter, startSearchFrom)
 			// update wordDisplay
-			// https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
 			this.wordDisplay = this.wordDisplay.substring(0,index) + letter + this.wordDisplay.substring(index + 1);
 			startSearchFrom = index + 1;
 		}
