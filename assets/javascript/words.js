@@ -24,14 +24,14 @@ var words =
 {
 	word:"takingbacksunday",
 	band:"Taking Back Sunday",
-	imageUrl:"assets/images/makedamnsure.jpg",
+	imageUrl:"assets/images/makedamnsure.png",
 	songName:"Taking Back Sunday - MakeDamnSure",
 	songUrl:"assets/music/makedamnsure.ogg",
 },
 {
 	word:"weezer",
 	band:"Weezer",
-	imageUrl:"assets/images/sayitaintso.jpg",
+	imageUrl:"assets/images/sayitaintso.png",
 	songName:"Weezer - Say It Ain't So",
 	songUrl:"assets/music/sayitaintso.ogg",
 },
@@ -66,7 +66,7 @@ var words =
 {
 	word:"falloutboy",
 	band:"Fall Out Boy",
-	imageUrl:"assets/images/sugarweregoindown.jpg",
+	imageUrl:"assets/images/sugarweregoindown.png",
 	songName:"Fall Out Boy - Sugar, We're Goin' Down",
 	songUrl:"assets/music/sugarweregoindown.ogg",
 },
