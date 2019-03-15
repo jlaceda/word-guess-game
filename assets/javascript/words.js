@@ -1,0 +1,73 @@
+var words =
+[
+{
+	word:"jimmyeatworld",
+	band:"Jimmy Eat World",
+	imageUrl:"assets/images/sweetness.jpg",
+	songName:"Jimmy Eat World - Sweetness",
+	songUrl:"assets/music/sweetness.ogg",
+},
+{
+	word:"linkinpark",
+	band:"Linkin Park",
+	imageUrl:"assets/images/crawling.jpg",
+	songName:"Linkin Park - Crawling",
+	songUrl:"assets/music/crawling.ogg",
+},
+{
+	word:"mychemicalromance",
+	band:"My Chemical Romance",
+	imageUrl:"assets/images/helena.jpg",
+	songName:"My Chemical Romance - Helena",
+	songUrl:"assets/music/helena.ogg",
+},
+{
+	word:"takingbacksunday",
+	band:"Taking Back Sunday",
+	imageUrl:"assets/images/makedamnsure.jpg",
+	songName:"Taking Back Sunday - MakeDamnSure",
+	songUrl:"assets/music/makedamnsure.ogg",
+},
+{
+	word:"weezer",
+	band:"Weezer",
+	imageUrl:"assets/images/sayitaintso.jpg",
+	songName:"Weezer - Say It Ain't So",
+	songUrl:"assets/music/sayitaintso.ogg",
+},
+{
+	word:"brighteyes",
+	band:"Bright Eyes",
+	imageUrl:"assets/images/loveridonthavetolove.jpg",
+	songName:"Bright Eyes - Lover I Don't Have to Love",
+	songUrl:"assets/music/loveridonthavetolove.ogg",
+},
+{
+	word:"thursday",
+	band:"Thursday",
+	imageUrl:"assets/images/understandinginacarcrash.jpg",
+	songName:"Thursday - Understanding in a Car Crash",
+	songUrl:"assets/music/understandinginacarcrash.ogg",
+},
+{
+	word:"newfoundglory",
+	band:"New Found Glory",
+	imageUrl:"assets/images/myfriendsoveryou.jpg",
+	songName:"New Found Glory - My Friends Over You",
+	songUrl:"assets/music/myfriendsoveryou.ogg",
+},
+{
+	word:"dashboardconfessional",
+	band:"Dashboard Confessional",
+	imageUrl:"assets/images/vindicated.jpg",
+	songName:"Dashboard Confessional - Vindicated",
+	songUrl:"assets/music/vindicated.ogg",
+},
+{
+	word:"falloutboy",
+	band:"Fall Out Boy",
+	imageUrl:"assets/images/sugarweregoindown.jpg",
+	songName:"Fall Out Boy - Sugar, We're Goin' Down",
+	songUrl:"assets/music/sugarweregoindown.ogg",
+},
+]

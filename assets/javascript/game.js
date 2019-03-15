@@ -1,4 +1,3 @@
-
 // grab all the elements to be manipulated
 var helpEl = document.getElementById("help");
 var winsEl = document.getElementById("wins");
@@ -6,214 +5,27 @@ var remainingGuessCountEl = document.getElementById("remainingGuessCount");
 var lettersGuessedEl = document.getElementById("lettersGuessed");
 var wordDisplayEl = document.getElementById("wordDisplay");
 
+// Updates DOM
+// param: Game Object
+// reads: WordGuessGame
+// writes: winsEl, remainingGuessCountEl, helpEl, lettersGuessedEl, wordDisplayEl
+// returns: nothing
+function updateDisplay(game)
+{
+	winsEl.textContent = game.wins;
+	remainingGuessCountEl.textContent = game.remainingGuesses;
+	lettersGuessedEl.textContent = game.lettersGuessed;
+	wordDisplayEl.textContent = game.wordDisplay;
+	helpEl.textContent = game.helpText;
+}
+
 // GAME OBJECT !!!
-var WordGuessGame = {
-	LEGALLETTERS: "abcdefghijklmnopqrstuvwxyz",
-	// https://en.wiktionary.org/wiki/Appendix:Basic_English_word_list#Things_-_200_picturable_words
-	availableWords: [
-	"angle",
-	"ant",
-	"apple",
-	"arch",
-	"arm",
-	"army",
-	"baby",
-	"bag",
-	"ball",
-	"band",
-	"basin",
-	"basket",
-	"bath",
-	"bed",
-	"bee",
-	"bell",
-	"berry",
-	"bird",
-	"blade",
-	"board",
-	"boat",
-	"bone",
-	"book",
-	"boot",
-	"bottle",
-	"box",
-	"boy",
-	"brain",
-	"brake",
-	"branch",
-	"brick",
-	"bridge",
-	"brush",
-	"bucket",
-	"bulb",
-	"button",
-	"cake",
-	"camera",
-	"card",
-	"cart",
-	"carriage",
-	"cat",
-	"chain",
-	"cheese",
-	"chest",
-	"chin",
-	"church",
-	"circle",
-	"clock",
-	"cloud",
-	"coat",
-	"collar",
-	"comb",
-	"cord",
-	"cow",
-	"cup",
-	"curtain",
-	"cushion",
-	"dog",
-	"door",
-	"drain",
-	"drawer",
-	"dress",
-	"drop",
-	"ear",
-	"egg",
-	"engine",
-	"eye",
-	"face",
-	"farm",
-	"feather",
-	"finger",
-	"fish",
-	"flag",
-	"floor",
-	"fly",
-	"foot",
-	"fork",
-	"fowl",
-	"frame",
-	"garden",
-	"girl",
-	"glove",
-	"goat",
-	"gun",
-	"hair",
-	"hammer",
-	"hand",
-	"hat",
-	"head",
-	"heart",
-	"hook",
-	"horn",
-	"horse",
-	"hospital",
-	"house",
-	"island",
-	"jewel",
-	"kettle",
-	"key",
-	"knee",
-	"knife",
-	"knot",
-	"leaf",
-	"leg",
-	"library",
-	"line",
-	"lip",
-	"lock",
-	"map",
-	"match",
-	"monkey",
-	"moon",
-	"mouth",
-	"muscle",
-	"nail",
-	"neck",
-	"needle",
-	"nerve",
-	"net",
-	"nose",
-	"nut",
-	"office",
-	"orange",
-	"oven",
-	"parcel",
-	"pen",
-	"pencil",
-	"picture",
-	"pig",
-	"pin",
-	"pipe",
-	"plane",
-	"plate",
-	"plough",
-	"pocket",
-	"pot",
-	"potato",
-	"prison",
-	"pump",
-	"rail",
-	"rat",
-	"receipt",
-	"ring",
-	"rod",
-	"roof",
-	"root",
-	"sail",
-	"school",
-	"scissors",
-	"screw",
-	"seed",
-	"sheep",
-	"shelf",
-	"ship",
-	"shirt",
-	"shoe",
-	"skin",
-	"skirt",
-	"snake",
-	"sock",
-	"spade",
-	"sponge",
-	"spoon",
-	"spring",
-	"square",
-	"stamp",
-	"star",
-	"station",
-	"stem",
-	"stick",
-	"stocking",
-	"stomach",
-	"store",
-	"street",
-	"sun",
-	"table",
-	"tail",
-	"thread",
-	"throat",
-	"thumb",
-	"ticket",
-	"toe",
-	"tongue",
-	"tooth",
-	"town",
-	"train",
-	"tray",
-	"tree",
-	"trousers",
-	"umbrella",
-	"wall",
-	"watch",
-	"wheel",
-	"whip",
-	"whistle",
-	"window",
-	"wing",
-	"wire",
-	"worm"],
+var WordGuessGame =
+{
+	availableWords: words,
 	wordsGuessed: [],
 	wordsNotGuessed: [],
-	currentWord: "",
+	currentWord: {},
 	wins: 0,
 	remainingGuesses: 0,
 	lettersGuessed: "",
@@ -222,14 +34,16 @@ var WordGuessGame = {
 	helpText: "Press ANY letter key to get started.",
 	gameOver: false,
 
-	// METHODS:
-	// method that puts a new word into currentWord
-	// from availableWords as a string
-	// also moves the chosen word into wordsUsed
+	// GAME METHODS:
+
+	// puts a new word into currentWord
+	// reads: availableWords
+	// writes: currentWord, availableWords
+	// returns: nothing
 	newRandomWord: function() 
 	{
 		// clear word
-		this.currentWord = "";
+		this.currentWord = {};
 
 		// Game over check
 		if (this.availableWords.length === 0)
@@ -248,13 +62,17 @@ var WordGuessGame = {
 		this.currentWord = word;
 	},
 
-	// start a round.
+	// start a round
+	// reads: currentWord
+	// writes: currentWord, gameOver, helpText, wordDisplay, remainingGuesses, lettersGuessed, isPlaying
+	// returns: nothing
 	initializeRound: function()
 	{
 		// initialize game
 		this.newRandomWord();
 
-		if (this.currentWord === "")
+		// sets gameOver true when we run out of words
+		if (this.currentWord === {})
 		{
 			this.gameOver = true;
 			this.helpText = "Game Over! You got " + this.wins + " .";
@@ -263,7 +81,7 @@ var WordGuessGame = {
 
 		// create display of underscores for each letter in the word.
 		var blanks = ""
-		for (let i = 0; i < this.currentWord.length; i++)
+		for (let i = 0; i < this.currentWord.word.length; i++)
 		{
 			blanks = blanks + "_";
 		}
@@ -276,6 +94,11 @@ var WordGuessGame = {
 		this.isPlaying = true;
 	},
 
+	// tries a letter against hidden word
+	// params: letter to be tried
+	// reads: currentWord, lettersGuessed
+	// writes: remainingGuesses, lettersGuessed, helpText, wordDisplay
+	// returns: nothing
 	guessLetter: function(letter)
 	{
 		// already guess this letter, skip.
@@ -285,13 +108,14 @@ var WordGuessGame = {
 			return;
 		}
 
-		// add to lettersGuessed
-		this.lettersGuessed = this.lettersGuessed + " " + letter;
+		var word = this.currentWord.word
 
 		// this letter is not in the word.
-		if (this.currentWord.indexOf(letter) === -1)
+		if (word.indexOf(letter) === -1)
 		{
 			this.remainingGuesses--;
+			// add to lettersGuessed
+			this.lettersGuessed = this.lettersGuessed + " " + letter;
 			this.helpText = "Oops! Try again."
 			return;
 		}
@@ -299,11 +123,10 @@ var WordGuessGame = {
 		this.helpText = "Noice!"
 
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
-		// 
 		var startSearchFrom = 0;
-		while (this.currentWord.indexOf(letter, startSearchFrom) !== -1) 
+		while (word.indexOf(letter, startSearchFrom) !== -1) 
 		{
-			var index = this.currentWord.indexOf(letter, startSearchFrom)
+			var index = word.indexOf(letter, startSearchFrom)
 			// update wordDisplay
 			// https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
 			this.wordDisplay = this.wordDisplay.substring(0,index) + letter + this.wordDisplay.substring(index + 1);
@@ -312,15 +135,11 @@ var WordGuessGame = {
 
 	},
 
-	updateDisplay: function()
-	{
-		winsEl.textContent = this.wins;
-		remainingGuessCountEl.textContent = this.remainingGuesses;
-		lettersGuessedEl.textContent = this.lettersGuessed;
-		wordDisplayEl.textContent = this.wordDisplay;
-		helpEl.textContent = this.helpText;
-	},
-
+	// Checks if player has won or lost the round
+	// no side effects if neither won nor lost
+	// reads: wordDisplay, remainingGuesses, currentWord
+	// writes: wins, isPlaying, helpText, wordsGuessed
+	// returns: bool if won
 	checkWinLoss: function()
 	{
 		// round won if no more blanks
@@ -328,20 +147,20 @@ var WordGuessGame = {
 		{
 			this.wins++;
 			this.isPlaying = false;
-			this.helpText = "Dang! You won the round, good job! Press ANY letter key to get a new word.";
-			// put word into wordsNotGuessed
+			this.helpText = "Dang! Good job getting " + this.currentWord.band + "! Press ANY letter key to get a new word.";
+			// put word into wordsGuessed
 			this.wordsGuessed.push(this.currentWord);
-			return;
+			return true;
 		}
 
 		// round loss
 		if (this.remainingGuesses === 0)
 		{
 			this.isPlaying = false;
-			this.helpText = "Out of guesses! The word was " + this.currentWord + ". Press ANY letter key to get a new word.";
+			this.helpText = "Out of guesses! The word was " + this.currentWord.band + ". Press ANY letter key to get a new word.";
 			// put word into wordsNotGuessed
 			this.wordsNotGuessed.push(this.currentWord);
-			return;
+			return false;
 		}
 	},
 }
@@ -357,7 +176,7 @@ document.onkeyup = function(event)
 	}
 
 	var keyPressed = event.key;
-	var isNotLetter = WordGuessGame.LEGALLETTERS.indexOf(keyPressed) === -1;
+	var isNotLetter = "abcdefghijklmnopqrstuvwxyz".indexOf(keyPressed) === -1;
 
 	// skip everything if a non letter is pressed.
 	if (isNotLetter) return;
@@ -366,14 +185,19 @@ document.onkeyup = function(event)
 	if (!WordGuessGame.isPlaying)
 	{
 		WordGuessGame.initializeRound();
-		WordGuessGame.updateDisplay();
+		updateDisplay(WordGuessGame);
 		return;
 	}
 	
 	// check if letter pressed is in the word
 	WordGuessGame.guessLetter(keyPressed);
-	WordGuessGame.checkWinLoss();
+
+	// update music player
+	if (WordGuessGame.checkWinLoss())
+	{
+		updateMusicPlayer(WordGuessGame.currentWord)
+	}
 
 	// update ui
-	WordGuessGame.updateDisplay();
+	updateDisplay(WordGuessGame);
 }

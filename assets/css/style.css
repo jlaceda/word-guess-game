@@ -3,7 +3,12 @@ span#wordDisplay
     letter-spacing: 0.5rem;
 }
 
-#musicPlayer
+.hide
 {
-    display: hidden;
+    display: none;
+}
+
+.show
+{
+    display: block;
 }
