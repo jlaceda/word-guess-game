@@ -86,7 +86,7 @@ var WordGuessGame =
 
 		// init round game state
 		this.wordDisplay = blanks;
-		this.remainingGuesses = 15;
+		this.remainingGuesses = 10;
 		this.lettersGuessed = "";
 		this.helpText = "Press a letter key to guess."
 		this.isPlaying = true;
