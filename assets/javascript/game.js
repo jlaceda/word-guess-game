@@ -38,18 +38,19 @@ var WordGuessGame =
 
 	// puts a new word into currentWord
 	// reads: availableWords
-	// writes: currentWord, availableWords
+	// writes: currentWord, availableWords, gameOver
 	// returns: nothing
 	newRandomWord: function() 
 	{
-		// clear word
-		this.currentWord = {};
-
-		// Game over check
+		// Game over when there's no more words left.
 		if (this.availableWords.length === 0)
 		{
+			this.gameOver = true;
 			return;
 		}
+
+		// clear word
+		this.currentWord = {};
 		
 		var randomIndex = Math.floor(Math.random() * Math.floor(this.availableWords.length));
 
@@ -70,10 +71,9 @@ var WordGuessGame =
 		this.newRandomWord();
 
 		// sets gameOver true when we run out of words
-		if (this.currentWord === {})
+		if (this.gameOver)
 		{
-			this.gameOver = true;
-			this.helpText = "Game Over! You got " + this.wins + " .";
+			this.helpText = "Game Over! You got " + this.wins + " . Refresh to play again.";
 			return;
 		}
 
